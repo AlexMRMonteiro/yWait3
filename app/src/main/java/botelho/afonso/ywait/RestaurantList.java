@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.AdapterView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -68,10 +69,11 @@ public class RestaurantList extends AppCompatActivity {
                 String sql = "SELECT * FROM restaurant;";
                 ResultSet rs = stmt.executeQuery(sql);
                 while(rs.next()) {
+                    String id = rs.getString("restaurant_id");
                     String name = rs.getString("restaurant_name");
                     String desc = rs.getString("restaurant_desc");
                     String rating = String.valueOf(rs.getBigDecimal("restaurant_rating"));
-                    restaurantList.add(new Restaurant(name, desc, rating));
+                    restaurantList.add(new Restaurant(id, name, desc, rating));
                 }
 
                 msg = "Process complete.";
