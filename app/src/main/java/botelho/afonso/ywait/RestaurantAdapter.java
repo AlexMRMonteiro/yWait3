@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -53,10 +55,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             @Override
             public void onClick(View v) {
                 Intent showRestaurantDetail = new Intent(mCtx.getApplicationContext(),RestaurantDetail.class);
-                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_ID", restaurantList.get(i).getId());
+                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT", (Parcelable) restaurantList.get(i));
+                /*showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_ID", restaurantList.get(i).getId());
                 showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_NAME", restaurantList.get(i).getName());
                 showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_DESC", restaurantList.get(i).getDesc());
-                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_RATING", restaurantList.get(i).getRating());
+                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_RATING", restaurantList.get(i).getRating());*/
                 mCtx.startActivity(showRestaurantDetail);
             }
         });

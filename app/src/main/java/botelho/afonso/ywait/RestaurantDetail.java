@@ -13,6 +13,7 @@ public class RestaurantDetail extends AppCompatActivity {
     private TextView nameTextView;
     private TextView descTextView;
     private TextView ratingTextView;
+    private Restaurant restaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,19 @@ public class RestaurantDetail extends AppCompatActivity {
         ratingTextView = (TextView) findViewById(R.id.ratingTextView);
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("botelho.afonso.ywait.RESTAURANT_ID");
+        restaurant = (Restaurant) intent.getParcelableExtra("botelho.afonso.ywait.RESTAURANT");
+
+        /*String id = intent.getStringExtra("botelho.afonso.ywait.RESTAURANT_ID");
         String name = intent.getStringExtra("botelho.afonso.ywait.RESTAURANT_NAME");
         String desc = intent.getStringExtra("botelho.afonso.ywait.RESTAURANT_DESC");
         String rating = intent.getStringExtra("botelho.afonso.ywait.RESTAURANT_RATING");
-        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), getImage(Integer.parseInt(id) - 1)));
         nameTextView.setText(name);
         descTextView.setText(desc);
-        ratingTextView.setText(rating);
+        ratingTextView.setText(rating);*/
+        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), getImage(Integer.parseInt(restaurant.getId()) - 1)));
+        nameTextView.setText(restaurant.getName());
+        descTextView.setText(restaurant.getDesc());
+        ratingTextView.setText(restaurant.getRating());
 
     }
 
