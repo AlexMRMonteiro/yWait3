@@ -32,14 +32,6 @@ public class RestaurantList extends AppCompatActivity {
         restaurantRecyclerView.setHasFixedSize(true);
         restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /*restaurantList.add(new Restaurant("Restaurante 1", "Comida boa", "5.0"));
-        restaurantList.add(new Restaurant("Restaurante 2", "Comida má", "2.0"));
-        restaurantList.add(new Restaurant("Restaurante 3", "Comida média", "3.5"));
-        restaurantList.add(new Restaurant("Restaurante 4", "Comida assim-assim", "2.8"));
-
-        restaurantAdapter = new RestaurantAdapter(this, restaurantList);
-        restaurantRecyclerView.setAdapter(restaurantAdapter);*/
-
         restaurantAdapter = new RestaurantAdapter(this, restaurantList);
         GetData retrieveData = new GetData();
         retrieveData.execute();

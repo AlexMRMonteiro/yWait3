@@ -56,10 +56,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             public void onClick(View v) {
                 Intent showRestaurantDetail = new Intent(mCtx.getApplicationContext(),RestaurantDetail.class);
                 showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT", (Parcelable) restaurantList.get(i));
-                /*showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_ID", restaurantList.get(i).getId());
-                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_NAME", restaurantList.get(i).getName());
-                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_DESC", restaurantList.get(i).getDesc());
-                showRestaurantDetail.putExtra("botelho.afonso.ywait.RESTAURANT_RATING", restaurantList.get(i).getRating());*/
                 mCtx.startActivity(showRestaurantDetail);
             }
         });
