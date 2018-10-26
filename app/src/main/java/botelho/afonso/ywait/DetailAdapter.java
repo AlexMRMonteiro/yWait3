@@ -1,5 +1,6 @@
 package botelho.afonso.ywait;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableLayoutListener;
 import com.github.aakira.expandablelayout.ExpandableLinearLayout;
+import com.github.aakira.expandablelayout.Utils;
 
 import java.util.List;
 
@@ -78,12 +80,12 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                     @Override
                     public void onPreOpen() {
-
+                        changeRotate(viewHolder.arrowView,0f,180f).start();
                     }
 
                     @Override
                     public void onPreClose() {
-
+                        changeRotate(viewHolder.arrowView,180f,0f).start();
                     }
 
                     @Override
@@ -100,12 +102,24 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     @Override
                     public void onClick(View v) {
                         viewHolder.expandableLayout.toggle();
+                        if(viewHolder.arrowView.getRotation() == 180f)
+                            viewHolder.arrowView.setRotation(0f);
+                        else
+                            viewHolder.arrowView.setRotation(180f);
                     }
                 });
 
             } break;
             default:
+                break;
         }
+    }
+
+    private ObjectAnimator changeRotate(View arrowView, float from, float to) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(arrowView,"rotation",from,to);
+        animator.setDuration(100);
+        animator.setInterpolator(Utils.createInterpolator(Utils.LINEAR_INTERPOLATOR));
+        return animator;
     }
 
     @Override
@@ -141,6 +155,7 @@ class CategoryViewHolder extends RecyclerView.ViewHolder {
 
     TextView categoryTextView, menuItemTextView;
     RelativeLayout relativeLayout;
+    View arrowView;
     ExpandableLinearLayout expandableLayout;
 
     public CategoryViewHolder(@NonNull View itemView) {
@@ -149,5 +164,6 @@ class CategoryViewHolder extends RecyclerView.ViewHolder {
         menuItemTextView = (TextView) itemView.findViewById(R.id.menuItemTextView);
         relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         expandableLayout = (ExpandableLinearLayout) itemView.findViewById(R.id.expandableLayout);
+        arrowView = (View) itemView.findViewById(R.id.arrowView);
     }
 }
