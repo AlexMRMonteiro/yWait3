@@ -14,58 +14,55 @@ import java.util.List;
 
 public class RestaurantDetail extends AppCompatActivity {
 
-    private ImageView imageView;
+    /*private ImageView imageView;
     private TextView nameTextView;
     private TextView descTextView;
-    private TextView ratingTextView;
+    private TextView ratingTextView;*/
     private Restaurant restaurant;
-    private RecyclerView mRecyclerView;
-    private MenuAdapter mAdapter;
-    private List<Menu> categories;
+    private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
+    private List<Detail> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
 
-        imageView = (ImageView) findViewById(R.id.imageView);
+        /*imageView = (ImageView) findViewById(R.id.imageView);
         nameTextView = (TextView) findViewById(R.id.nameTextView);
         descTextView = (TextView) findViewById(R.id.descTextView);
-        ratingTextView = (TextView) findViewById(R.id.ratingTextView);
+        ratingTextView = (TextView) findViewById(R.id.ratingTextView);*/
 
         Intent intent = getIntent();
         restaurant = (Restaurant) intent.getParcelableExtra("botelho.afonso.ywait.RESTAURANT");
-        imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), getImage(Integer.parseInt(restaurant.getId()) - 1)));
+        /*imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), getImage(Integer.parseInt(restaurant.getId()) - 1)));
         nameTextView.setText(restaurant.getName());
         descTextView.setText(restaurant.getDesc());
-        ratingTextView.setText(restaurant.getRating());
+        ratingTextView.setText(restaurant.getRating());*/
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.menuRecyclerView);
         getCategories();
-        mAdapter = new MenuAdapter(categories);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(RestaurantDetail.this));
-        mRecyclerView.setAdapter(mAdapter);
 
     }
 
-    private int getImage(int index) {
-        switch (index) {
-            case 0: return R.drawable.pizza;
-            case 1: return R.drawable.sushi;
-            case 2: return R.drawable.bitoque;
-            default: return -1;
-        }
-    }
 
     private void getCategories() {
-        categories = new ArrayList<>(3);
-        for(int i = 0; i < 3; i++) {
-            List<MenuItem> items = new ArrayList<>(3);
-            items.add(new MenuItem("Sopa de tomate"));
-            items.add(new MenuItem("Nigiri salmão"));
-            items.add(new MenuItem("Bitoque"));
-            categories.add(new Menu("Category "+i, items));
-        }
+        Detail info = new Info(restaurant);
+        items.add(info);
+
+        items.add((Detail) new MenuCategory("Entradas"));
+        items.add((Detail) new MenuCategory("Sopas"));
+        items.add((Detail) new MenuCategory("Peixe"));
+        items.add((Detail) new MenuCategory("Massa"));
+        items.add((Detail) new MenuCategory("Sobremesa"));
+        items.add((Detail) new MenuCategory("Bebidas"));
+
+
+        DetailAdapter adapter = new DetailAdapter(items);
+        recyclerView.setAdapter(adapter);
     }
 }
