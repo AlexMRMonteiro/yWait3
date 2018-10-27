@@ -1,12 +1,10 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.activities;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.AdapterView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import botelho.afonso.ywait.R;
+import botelho.afonso.ywait.adapters.RestaurantAdapter;
+import botelho.afonso.ywait.models.Restaurant;
 
 public class RestaurantList extends AppCompatActivity {
 

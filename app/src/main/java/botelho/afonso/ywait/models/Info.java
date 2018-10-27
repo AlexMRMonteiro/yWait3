@@ -1,4 +1,4 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.models;
 
 public class Info extends Detail {
     private Restaurant restaurant;

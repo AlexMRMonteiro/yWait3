@@ -1,9 +1,10 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.adapters;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,14 @@ import com.github.aakira.expandablelayout.ExpandableLayoutListener;
 import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 import com.github.aakira.expandablelayout.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import botelho.afonso.ywait.R;
+import botelho.afonso.ywait.models.Detail;
+import botelho.afonso.ywait.models.Info;
+import botelho.afonso.ywait.models.MenuCategory;
+import botelho.afonso.ywait.models.MenuItem;
 
 public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -66,7 +74,7 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 MenuCategory category = (MenuCategory) items.get(i);
                 viewHolder.setIsRecyclable(false);
                 viewHolder.categoryTextView.setText(category.getName());
-                viewHolder.expandableLayout.setInRecyclerView(true);
+                viewHolder.expandableLayout.setInRecyclerView(false);
                 viewHolder.expandableLayout.setListener(new ExpandableLayoutListener() {
                     @Override
                     public void onAnimationStart() {
@@ -109,6 +117,11 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }
                 });
 
+                viewHolder.menuItemRecyclerView.setHasFixedSize(true);
+                viewHolder.layoutManager = new LinearLayoutManager(context);
+                viewHolder.menuItemRecyclerView.setLayoutManager(viewHolder.layoutManager);
+                getMenuItems(viewHolder.menuItemRecyclerView);
+
             } break;
             default:
                 break;
@@ -135,6 +148,18 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             default: return -1;
         }
     }
+
+    private void getMenuItems(RecyclerView rv) {
+        List<MenuItem> menuItems = new ArrayList<>();
+
+        menuItems.add(new MenuItem("Sopa de Tomate"));
+        menuItems.add(new MenuItem("Pizza margarita"));
+        menuItems.add(new MenuItem("Bitoque"));
+
+        MenuItemAdapter adapter = new MenuItemAdapter(menuItems);
+        rv.setAdapter(adapter);
+    }
+
 }
 
 class InfoViewHolder extends RecyclerView.ViewHolder {
@@ -153,17 +178,19 @@ class InfoViewHolder extends RecyclerView.ViewHolder {
 
 class CategoryViewHolder extends RecyclerView.ViewHolder {
 
-    TextView categoryTextView, menuItemTextView;
+    TextView categoryTextView;
     RelativeLayout relativeLayout;
     View arrowView;
     ExpandableLinearLayout expandableLayout;
+    RecyclerView menuItemRecyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     public CategoryViewHolder(@NonNull View itemView) {
         super(itemView);
         categoryTextView = (TextView) itemView.findViewById(R.id.categoryTextView);
-        menuItemTextView = (TextView) itemView.findViewById(R.id.menuItemTextView);
         relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         expandableLayout = (ExpandableLinearLayout) itemView.findViewById(R.id.expandableLayout);
         arrowView = (View) itemView.findViewById(R.id.arrowView);
+        menuItemRecyclerView = (RecyclerView) itemView.findViewById(R.id.menuItemRecyclerView);
     }
 }

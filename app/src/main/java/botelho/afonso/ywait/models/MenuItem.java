@@ -1,9 +1,9 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.models;
 
-public class MenuCategory extends Detail{
+public class MenuItem {
     private String name;
 
-    public MenuCategory(String name) {
+    public MenuItem(String name) {
         this.name = name;
     }
 

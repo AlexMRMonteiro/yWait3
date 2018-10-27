@@ -1,9 +1,7 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -14,16 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
+
+import botelho.afonso.ywait.R;
+import botelho.afonso.ywait.activities.RestaurantDetail;
+import botelho.afonso.ywait.models.Restaurant;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 

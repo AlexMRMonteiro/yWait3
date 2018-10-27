@@ -1,4 +1,4 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.activities;
 
 public class DbStrings {
     static final String DATABASE_URL = "193.136.128.53";

@@ -1,23 +1,23 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.activities;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import botelho.afonso.ywait.R;
+import botelho.afonso.ywait.adapters.DetailAdapter;
+import botelho.afonso.ywait.models.Detail;
+import botelho.afonso.ywait.models.Info;
+import botelho.afonso.ywait.models.MenuCategory;
+import botelho.afonso.ywait.models.Restaurant;
+
 public class RestaurantDetail extends AppCompatActivity {
 
-    /*private ImageView imageView;
-    private TextView nameTextView;
-    private TextView descTextView;
-    private TextView ratingTextView;*/
     private Restaurant restaurant;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -28,17 +28,8 @@ public class RestaurantDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
 
-        /*imageView = (ImageView) findViewById(R.id.imageView);
-        nameTextView = (TextView) findViewById(R.id.nameTextView);
-        descTextView = (TextView) findViewById(R.id.descTextView);
-        ratingTextView = (TextView) findViewById(R.id.ratingTextView);*/
-
         Intent intent = getIntent();
         restaurant = (Restaurant) intent.getParcelableExtra("botelho.afonso.ywait.RESTAURANT");
-        /*imageView.setImageBitmap(BitmapFactory.decodeResource(getResources(), getImage(Integer.parseInt(restaurant.getId()) - 1)));
-        nameTextView.setText(restaurant.getName());
-        descTextView.setText(restaurant.getDesc());
-        ratingTextView.setText(restaurant.getRating());*/
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -46,9 +37,7 @@ public class RestaurantDetail extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         getCategories();
-
     }
-
 
     private void getCategories() {
         Detail info = new Info(restaurant);

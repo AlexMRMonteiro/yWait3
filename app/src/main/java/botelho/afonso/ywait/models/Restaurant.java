@@ -1,4 +1,4 @@
-package botelho.afonso.ywait;
+package botelho.afonso.ywait.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
