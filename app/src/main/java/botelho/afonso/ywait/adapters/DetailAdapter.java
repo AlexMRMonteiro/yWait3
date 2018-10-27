@@ -120,7 +120,9 @@ public class DetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolder.menuItemRecyclerView.setHasFixedSize(true);
                 viewHolder.layoutManager = new LinearLayoutManager(context);
                 viewHolder.menuItemRecyclerView.setLayoutManager(viewHolder.layoutManager);
-                getMenuItems(viewHolder.menuItemRecyclerView);
+                //getMenuItems(viewHolder.menuItemRecyclerView);
+                MenuItemAdapter adapter = new MenuItemAdapter(((MenuCategory) items.get(i)).getItems());
+                viewHolder.menuItemRecyclerView.setAdapter(adapter);
 
             } break;
             default:
