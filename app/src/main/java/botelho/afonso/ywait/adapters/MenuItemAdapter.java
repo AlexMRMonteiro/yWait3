@@ -2,11 +2,13 @@ package botelho.afonso.ywait.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,10 +34,16 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int i) {
         MenuItemViewHolder viewHolder = (MenuItemViewHolder) holder;
 
         viewHolder.nameTextView.setText(items.get(i).getName());
+        viewHolder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "You clicked on "+items.get(i).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -48,9 +56,11 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 class MenuItemViewHolder extends RecyclerView.ViewHolder {
 
     TextView nameTextView;
+    ConstraintLayout constraintLayout;
 
     public MenuItemViewHolder(@NonNull View itemView) {
         super(itemView);
         nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
+        constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.constraintLayout);
     }
 }

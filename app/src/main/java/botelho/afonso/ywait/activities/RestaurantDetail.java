@@ -83,7 +83,6 @@ public class RestaurantDetail extends AppCompatActivity {
                 Class.forName(JDBC_DRIVER);
                 conn = DriverManager.getConnection(DB_URL, DbStrings.USERNAME, DbStrings.PASSWORD);
 
-                // Get categories
                 stmt1 = conn.prepareStatement("SELECT distinct category FROM menu_item WHERE restaurant_id=?");
                 stmt1.setString(1,restaurant.getId());
 
@@ -92,7 +91,7 @@ public class RestaurantDetail extends AppCompatActivity {
                     String category = rs1.getString("category");
                     MenuCategory mc = new MenuCategory(category);
 
-                    stmt2 = conn.prepareStatement("SELECT * FROM menu_item WHERE restaurant_id=? AND category =?");
+                    stmt2 = conn.prepareStatement("SELECT * FROM menu_item WHERE restaurant_id=? AND category=?");
                     stmt2.setString(1, restaurant.getId());
                     stmt2.setString(2, category);
                     ResultSet rs2 = stmt2.executeQuery();
